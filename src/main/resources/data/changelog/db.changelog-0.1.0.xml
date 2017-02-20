@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <changeSet id="1" author="ssv">
+    <createTable tableName="user">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="device_id" type="varchar(45)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    
+    <createTable tableName="order_status">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="name" type="varchar(45)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    
+    <createTable tableName="category_food">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="name" type="varchar(45)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    
+    <createTable tableName="food">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="category_id" type="bigint(20)">
+        <constraints references="category_food(id)" foreignKeyName="fk_food_2_category_food" deleteCascade="true" nullable="false" />
+      </column>
+      <column name="title" type="varchar(45)">
+        <constraints nullable="true" />
+      </column>
+      <column name="description" type="varchar(500)">
+        <constraints nullable="true" />
+      </column>
+      <column name="image_link" type="varchar(100)">
+        <constraints nullable="true" />
+      </column>
+    </createTable>
+    
+    <createTable tableName="order">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="food_id" type="bigint(20)">
+        <constraints references="food(id)" foreignKeyName="fk_order_2_food" deleteCascade="true" nullable="false" />
+      </column>
+      <column name="user_id" type="bigint(20)">
+        <constraints references="user(id)" foreignKeyName="fk_order_2_user" deleteCascade="true" nullable="false" />
+      </column>
+      <column name="status_id" type="bigint(20)">
+        <constraints references="order_status(id)" foreignKeyName="fk_order_2_status_id" deleteCascade="true" nullable="false" />
+      </column>
+      <column name="address" type="varchar(100)">
+        <constraints nullable="true" />
+      </column>
+      <column name="phone" type="varchar(45)">
+        <constraints nullable="true" />
+      </column>
+    </createTable>
+    
+    <createTable tableName="history">
+      <column name="id" type="bigint(20)" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="order_user_id1" type="bigint(20)">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="order_order_status_id" type="bigint(20)">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      
+      <column name="order_id" type="bigint(20)">
+        <constraints references="order(id)" foreignKeyName="FK_order_food_id" deleteCascade="true" nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+    
+  <changeSet id="2" author="ssv">
+    <insert tableName="user">
+        <column name="id" value="1" />
+        <column name="device_id" value="1dtsrt34645ghnd" />
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>
