@@ -1,6 +1,7 @@
 package com.gda.ws.service;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -64,15 +65,29 @@ public class UserServiceBean implements UserService {
         repository.delete(id);
         LOG.info("< delete {}", id);
     }
-    
-    private static UserDto from(User entity){
-    	UserDto dto = new UserDto();
+
+	@Override
+	public UserDto findByDeviceId(String deviceId) {
+		LOG.info("> findByDeviceId {}", deviceId);
+        User found = repository.findByDeviceId(deviceId);
+        LOG.info("< findByDeviceId {}", deviceId);
+        return from(found);
+	}
+	
+	private static UserDto from(User entity){
+		if(Objects.isNull(entity)){
+    		return null;
+    	}
+		UserDto dto = new UserDto();
     	dto.setId(entity.getId());
     	dto.setDeviceId(entity.getDeviceId());
     	return dto;
     }
     
     private static User from(UserDto dto){
+    	if(Objects.isNull(dto)){
+    		return null;
+    	}
     	User entity = new User();
     	entity.setId(dto.getId());
     	entity.setDeviceId(dto.getDeviceId());

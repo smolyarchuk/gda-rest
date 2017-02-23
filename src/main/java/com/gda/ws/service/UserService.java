@@ -11,4 +11,6 @@ public interface UserService {
     UserDto create(UserDto entity);
     UserDto update(UserDto entity);
     void delete(Long id);
+    
+    UserDto findByDeviceId(String deviceId);
 }

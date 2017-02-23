@@ -66,13 +66,42 @@ public class UserController {
     public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
         LOG.info("> getUser");
 
-        final UserDto entity = service.findOne(id);
+        UserDto entity = service.findOne(id);
         if (entity == null) {
-            LOG.info("< getGreeting");
+            LOG.info("< getUser");
             return new ResponseEntity<UserDto>(HttpStatus.NOT_FOUND);
         }
 
-        LOG.info("< getGreeting");
+        LOG.info("< getUser");
+        return new ResponseEntity<UserDto>(entity, HttpStatus.OK);
+    }
+    
+    /**
+     * <p>
+     * Web service endpoint to fetch a single UserDto entity by device id.
+     * </p>
+     * <p>
+     * If found, the UserDto is returned as JSON with HTTP status 200. If not found, the service returns an empty
+     * response body with HTTP status 404.
+     * </p>
+     * 
+     * @param id A Long URL path variable containing the UserDto device id.
+     * @return A ResponseEntity containing a single UserDto object, if found, and a HTTP status code as described in
+     *         the method comment.
+     */
+    @RequestMapping(value = "/api/users/device-id/{deviceId}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDto> getUserByDeviceId(@PathVariable String deviceId) {
+        LOG.info("> getUser");
+
+        UserDto entity = service.findByDeviceId(deviceId);
+        if (entity == null) {
+            LOG.info("< getUserByDeviceId");
+            return new ResponseEntity<UserDto>(HttpStatus.NOT_FOUND);
+        }
+
+        LOG.info("< getUserByDeviceId");
         return new ResponseEntity<UserDto>(entity, HttpStatus.OK);
     }
 
