@@ -33,9 +33,6 @@
       <column name="name" type="varchar(45)">
         <constraints nullable="false" />
       </column>
-      <column name="link" type="varchar(200)">
-        <constraints nullable="false" />
-      </column>
     </createTable>
     
     <createTable tableName="food">
@@ -97,27 +94,7 @@
   <changeSet id="2" author="ssv">
     <insert tableName="user">
         <column name="id" value="1" />
-        <column name="device_id" value="test_device_id_0001" />
-    </insert>
-    <insert tableName="category_food">
-      <column name="id" value="1" />
-      <column name="name" value="Soups" />
-      <column name="link" value="http://onlyglutenfreerecipes.com/wp-content/uploads/2017/01/vegan-fat-burning-soup-14-of-27-2.jpg"/>
-    </insert>
-    <insert tableName="category_food">
-      <column name="id" value="2" />
-      <column name="name" value="First Meal" />
-      <column name="link" value="https://www.macheesmo.com/wp-content/uploads/2014/03/firstmeal_feature.jpg"/>
-    </insert>
-    <insert tableName="category_food">
-      <column name="id" value="3" />
-      <column name="name" value="Desserts" />
-      <column name="link" value="http://www.takepart.com/sites/default/files/styles/tp_gallery_slide/public/chocolate-thunder-down-under-itok=WlYMtdbi.jpg"/>
-    </insert>
-    <insert tableName="category_food">
-      <column name="id" value="4" />
-      <column name="name" value="Drinks" />
-      <column name="link" value="http://images.r.cruisecritic.com/features/2016/06/bottoms-up-hero.jpg"/>
+        <column name="device_id" value="1dtsrt34645ghnd" />
     </insert>
   </changeSet>
 
