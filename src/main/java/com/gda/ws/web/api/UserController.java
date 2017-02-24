@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gda.ws.service.UserService;
 import com.gda.ws.web.api.dto.UserDto;
-import com.gda.ws.web.api.dto.UserResponse;
 
 /**
  * The UserController class is a RESTful web service controller. The <code>@RestController</code> annotation informs
@@ -123,13 +122,11 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserDto entity) {
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto entity) {
         LOG.info("> createUser");
         UserDto saved = service.create(entity);
-        UserResponse resp = new UserResponse();
-        resp.setUserEntity(saved);
         LOG.info("< createUser");
-        return new ResponseEntity<UserResponse>(resp, HttpStatus.CREATED);
+        return new ResponseEntity<UserDto>(saved, HttpStatus.CREATED);
     }
 
     /**
